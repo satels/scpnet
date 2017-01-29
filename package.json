@@ -1,0 +1,19 @@
+{
+  "name": "scpnet",
+  "version": "0.1.0",
+  "description": "SCP Foundation Russia new platform",
+  "main": "app/app.js",
+  "scripts": {
+    "test": "echo \"No tests: passing\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/resure/scpnet.git"
+  },
+  "author": "Gadzhi Gadzhiev <resure@zireael.org> (https://resure.net/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/resure/scpnet/issues"
+  },
+  "homepage": "https://scpfoundation.net"
+}

@@ -2,9 +2,12 @@
   "name": "scpnet",
   "version": "0.1.1",
   "description": "SCP Foundation Russia new platform",
-  "main": "app/app.js",
+  "main": "dist/app.js",
   "scripts": {
-    "test": "echo \"No tests: passing\" && exit 0"
+    "build": "babel app -d dist --source-maps",
+    "test": "echo \"No tests: passing\" && exit 0",
+    "start": "babel-node app/app.js",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -15,5 +18,12 @@
   "bugs": {
     "url": "https://github.com/resure/scpnet/issues"
   },
-  "homepage": "https://scpfoundation.net"
+  "homepage": "https://scpfoundation.net",
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-preset-es2015": "^6.22.0",
+    "eslint-config-zireael": "^2.1.0",
+    "pg": "^6.1.2",
+    "sequelize": "^3.30.1"
+  }
 }

@@ -1,5 +1,12 @@
-import Sequelize from 'sequelize';
+import initKnex from 'knex';
+import {Model} from 'objection';
 
-const sequelize = new Sequelize(process.env.POSTGRES_DSN);
+export const knex = initKnex({
+    client: 'pg',
+    connection: process.env.POSTGRES_DSN
+});
+Model.knex(knex);
+const query = knex.raw.bind(knex);
 
-export default sequelize;
+export {query};
+export {Page} from '../models/page';

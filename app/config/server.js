@@ -34,7 +34,7 @@ initRoutes(router);
 app.use('/', router);
 
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
-    (req.story || mainStory).error('Unhandled error', err);
+    (req.story || mainStory).error('Unhandled error', {attach: err});
     res.end('Internal server error');
     setImmediate(process.exit);
 });

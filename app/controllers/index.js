@@ -1,4 +1,8 @@
+import {query} from '../config/db';
 
 export default function (req, res) {
-    res.send({result: 'OK'});
+    query('select 2 + 2 as result')
+        .then((resp) => {
+            res.send({result: resp.rows[0].result});
+        });
 }

@@ -984,9 +984,9 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-zireael@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-zireael/-/eslint-config-zireael-2.1.0.tgz#bf4a39cbbb942288202f9f070939124eba77ab98"
+eslint-config-zireael@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-zireael/-/eslint-config-zireael-3.0.0.tgz#a6fe37efcba69b2bd257c3cab171d2e9a03d1c50"
   dependencies:
     babel-eslint "^7.1.1"
     eslint "^3.14.1"

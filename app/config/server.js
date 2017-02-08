@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import initRoutes from './routes';
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4444;
 const app = express();
 const router = express.Router(); // eslint-disable-line new-cap
 

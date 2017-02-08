@@ -9,4 +9,3 @@ Model.knex(knex);
 const query = knex.raw.bind(knex);
 
 export {query};
-export {Page} from '../models/page';

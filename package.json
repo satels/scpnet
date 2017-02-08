@@ -37,6 +37,7 @@
     "knex": "^0.12.6",
     "objection": "^0.6.2",
     "pg": "^6.1.2",
-    "storyboard": "^2.3.1"
+    "storyboard": "^2.3.1",
+    "wikidot-kit": "^0.5.0"
   }
 }

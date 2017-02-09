@@ -1,11 +1,12 @@
-import initKnex from 'knex';
-import {Model} from 'objection';
+import pgp from 'pg-promise';
+import monitor from 'pg-monitor';
+import Bluebird from 'bluebird';
 
-export const knex = initKnex({
-    client: 'pg',
-    connection: process.env.POSTGRES_DSN
-});
-Model.knex(knex);
-const query = knex.raw.bind(knex);
+const options = {
+    promiseLib: Bluebird
+};
 
-export {query};
+const db = pgp(options)(process.env.POSTGRES_DSN);
+monitor.attach(options);
+
+export default db;

@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "rm -rf dist && babel app -d dist --source-maps",
+    "console": "node dist/console",
     "test": "echo \"No tests: passing\" && exit 0",
     "start": "babel-node app/app.js",
     "prepublish": "npm run build",

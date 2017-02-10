@@ -1,6 +1,6 @@
 {
   "name": "scpnet",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "SCP Foundation Russia new platform",
   "main": "dist/app.js",
   "bin": {

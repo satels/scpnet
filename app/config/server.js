@@ -1,5 +1,6 @@
 import express from 'express';
 import http from 'http';
+import sentry from './sentry';
 import mainStory from './storyboard';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
@@ -8,6 +9,10 @@ import initRoutes from './routes';
 const port = process.env.PORT || 4444;
 const app = express();
 const router = express.Router(); // eslint-disable-line new-cap
+
+if (sentry) {
+    app.use(sentry.requestHandler());
+}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -33,10 +38,13 @@ router.use((req, res, next) => {
 initRoutes(router);
 app.use('/', router);
 
+if (sentry) {
+    app.use(sentry.errorHandler());
+}
+
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
     (req.story || mainStory).error('Unhandled error', {attach: err});
     res.end('Internal server error');
-    setImmediate(process.exit);
 });
 
 const server = http.createServer(app);

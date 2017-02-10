@@ -18,4 +18,3 @@ schedule.scheduleJob('0 3 * * *', () => {
         });
     });
 });
-

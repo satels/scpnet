@@ -1,5 +1,6 @@
 import {importQueue} from '../config/queues';
 import wk from '../config/wikidot-kit';
+import sentry from '../config/sentry';
 import importPage from '../jobs/import-wikidot-page';
 
 console.log('Import worker ready');
@@ -21,7 +22,8 @@ importQueue.process((job) => {
                         });
                     });
                     console.log(`Full import from ${params.wiki} enqueued`);
-                });
+                })
+                .catch(sentry.captureException);
 
         case 'page-import':
             return importPage({wiki: params.wiki, name: params.name});

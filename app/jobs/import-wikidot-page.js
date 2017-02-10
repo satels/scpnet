@@ -1,4 +1,5 @@
 import '../config/boot';
+import sentry from '../config/sentry';
 import wk from '../config/wikidot-kit';
 import db from '../config/db';
 
@@ -6,6 +7,7 @@ export default function importPage({wiki, name}) {
     return wk.fetchPage({wiki, name})
         .catch((error) => {
             console.error('Error fetching page from Wikidot', error);
+            sentry.captureException(error);
         })
         .then((data) => {
             return db.query(`
@@ -18,5 +20,6 @@ export default function importPage({wiki, name}) {
         })
         .catch((error) => {
             console.error('Error saving page', error);
+            sentry.captureException(error);
         });
 }

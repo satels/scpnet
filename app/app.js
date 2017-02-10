@@ -1,3 +1,4 @@
-import './config/boot';
-import mainStory from './config/storyboard';
-import app from './config/server';
+require('./config/boot');
+require('./config/storyboard');
+require('./config/server');
+

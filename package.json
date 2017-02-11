@@ -1,6 +1,6 @@
 {
   "name": "scpnet",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "SCP Foundation Russia new platform",
   "scripts": {
     "console": "node server/console",

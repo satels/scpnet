@@ -10,7 +10,9 @@
     "start": "pm2 startOrRestart server/config/pm2/${NODE_ENV:-development}.config.js",
     "stop": "pm2 stop server/config/pm2/${NODE_ENV:-development}.config.js",
     "logs": "pm2 logs --raw | pino",
-    "db": "knex --knexfile server/config/knexfile.js --cwd server"
+    "db": "knex --knexfile server/config/knexfile.js --cwd server",
+    "deploy": "ssh $SCPNET_DEPLOY_SERVER \"cd $SCPNET_DEPLOY_PATH && yarn upgrade scpnet && cd node_modules/scpnet && ln -sf dist server && ln -sf ../../../env .env && npm run db migrate:latest && npm run start\"",
+    "remote-console": "ssh $SCPNET_DEPLOY_SERVER \"cd $SCPNET_DEPLOY_PATH/node_modules/scpnet && npm run console\""
   },
   "repository": {
     "type": "git",

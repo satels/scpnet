@@ -1,6 +1,6 @@
 {
   "name": "scpnet",
-  "version": "0.6.4",
+  "version": "0.7.0",
   "description": "SCP Foundation Russia new platform",
   "scripts": {
     "build": "rm -rf dist && babel server -d dist --source-maps && cp -R server/public dist/public",

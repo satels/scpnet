@@ -22,6 +22,14 @@ importQueue.process((job) => {
                         });
                     });
                     console.log(`Full import from ${params.wiki} enqueued`);
+
+                    if (sentry) {
+                        sentry.captureMessage('Full wiki pages import scheduled', {
+                            level: 'info',
+                            wiki: params.wiki,
+                            pagesNumber: pages.length
+                        });
+                    }
                 })
                 .catch(sentry.captureException);
 

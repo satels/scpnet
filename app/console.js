@@ -1,9 +1,10 @@
 import './config/boot';
 import db from './config/db';
+import sentry from './config/sentry';
 import * as queues from './config/queues';
 import repl from 'repl';
 
-const context = {db, queues};
+const context = {db, queues, sentry};
 
 if (require.main === module) {
     const replServer = repl.start();

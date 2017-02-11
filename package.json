@@ -7,7 +7,6 @@
     "console": "node dist/console",
     "test": "eslint .",
     "prepublish": "npm run build",
-    "postinstall": "ln -sf dist server",
     "start": "pm2 startOrRestart server/config/pm2/${NODE_ENV:-development}.config.js",
     "stop": "pm2 stop server/config/pm2/${NODE_ENV:-development}.config.js",
     "logs": "pm2 logs --raw | pino",
@@ -48,6 +47,7 @@
     "pg-promise": "^5.5.6",
     "pino": "^3.4.0",
     "raven": "^1.1.2",
+    "serve-static": "^1.11.2",
     "toureiro": "^0.2.13",
     "wikidot-kit": "^0.5.0"
   },

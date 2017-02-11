@@ -6,6 +6,7 @@ import pino from '../config/pino';
 import expressPino from 'express-pino-logger';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
+import serveStatic from 'serve-static';
 import initRoutes from '../config/routes';
 
 const port = process.env.PORT || 4444;
@@ -17,6 +18,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(expressPino({logger: pino}));
+
+app.use(serveStatic(`${__dirname}/../public`));
 
 initRoutes(router);
 app.use('/', router);

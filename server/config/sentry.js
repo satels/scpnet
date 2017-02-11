@@ -7,6 +7,9 @@ let sentry;
 if (SENTRY_DSN) {
     Sentry.config(SENTRY_DSN).install();
     sentry = Sentry;
+
+    sentry.captureException = sentry.captureException.bind(sentry);
+    sentry.captureMessage = sentry.captureMessage.bind(sentry);
 } else {
     sentry = {
         captureMessage: () => {},

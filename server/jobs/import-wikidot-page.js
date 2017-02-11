@@ -8,7 +8,7 @@ export default function importPage({wiki, name}) {
     return wk.fetchPage({wiki, name})
         .catch((error) => {
             pino.error(error, 'Error fetching page from Wikidot');
-            sentry.captureException(error, {data: {wiki, name}});
+            sentry.captureException(error, {extra: {wiki, name}});
         })
         .then((data) => {
             return db.query(`
@@ -21,6 +21,6 @@ export default function importPage({wiki, name}) {
         })
         .catch((error) => {
             pino.error(error, 'Error saving page');
-            sentry.captureException(error, {data: {wiki, name}});
+            sentry.captureException(error, {extra: {wiki, name}});
         });
 }

@@ -26,13 +26,15 @@ importQueue.process((job) => {
 
                     sentry.captureMessage('Full wiki pages import scheduled', {
                         level: 'info',
-                        wiki: params.wiki,
-                        pagesNumber: pages.length
+                        extra: {
+                            wiki: params.wiki,
+                            pagesNumber: pages.length
+                        }
                     });
                 })
                 .catch((error) => {
                     pino.error(error, 'Error fetching page list during full import', params);
-                    sentry.captureException(error, {data: params});
+                    sentry.captureException(error, {extra: params});
                 });
 
         case 'page-import':

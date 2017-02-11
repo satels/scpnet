@@ -1,11 +1,11 @@
 
-exports.up = function(knex) {
+exports.up = (knex) => {
     return knex.schema.alterTable('pages', (t) => {
         t.unique(['name', 'wiki']);
     });
 };
 
-exports.down = function(knex) {
+exports.down = (knex) => {
     return knex.schema.alterTable('pages', (t) => {
         t.dropUnique(['name', 'wiki']);
     });

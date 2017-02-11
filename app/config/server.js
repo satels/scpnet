@@ -10,10 +10,7 @@ const port = process.env.PORT || 4444;
 const app = express();
 const router = express.Router(); // eslint-disable-line new-cap
 
-if (sentry) {
-    app.use(sentry.requestHandler());
-}
-
+app.use(sentry.requestHandler());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
@@ -38,9 +35,7 @@ router.use((req, res, next) => {
 initRoutes(router);
 app.use('/', router);
 
-if (sentry) {
-    app.use(sentry.errorHandler());
-}
+app.use(sentry.errorHandler());
 
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
     (req.story || mainStory).error('Unhandled error', {attach: err});

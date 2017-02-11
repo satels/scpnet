@@ -1,12 +1,13 @@
 import '../config/boot';
 import sentry from '../config/sentry';
+import pino from '../config/pino';
 import wk from '../config/wikidot-kit';
 import db from '../config/db';
 
 export default function importPage({wiki, name}) {
     return wk.fetchPage({wiki, name})
         .catch((error) => {
-            console.error('Error fetching page from Wikidot', error);
+            pino.error(error, 'Error fetching page from Wikidot');
             sentry.captureException(error);
         })
         .then((data) => {
@@ -16,10 +17,10 @@ export default function importPage({wiki, name}) {
             `, {name, wiki, data});
         })
         .then(() => {
-            console.log(`[DONE] ${wiki}/${name}`);
+            pino.info(`[DONE] ${wiki}/${name}`);
         })
         .catch((error) => {
-            console.error('Error saving page', error);
+            pino.error(error, 'Error saving page');
             sentry.captureException(error);
         });
 }

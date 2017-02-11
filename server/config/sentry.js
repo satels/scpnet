@@ -12,8 +12,8 @@ if (SENTRY_DSN) {
         captureMessage: () => {},
         captureExecption: () => {},
 
-        requestHandler: (req, res, next) => { next(); },
-        errorHandler: (err, req, res, next) => { next(err); }
+        requestHandler: () => (req, res, next) => next(),
+        errorHandler: () => (err, req, res, next) => next(err)
     };
 }
 

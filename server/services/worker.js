@@ -30,7 +30,9 @@ importQueue.process((job) => {
                         pagesNumber: pages.length
                     });
                 })
-                .catch(sentry.captureException);
+                .catch((error) => {
+                    sentry.captureException(error, {data: params});
+                });
 
         case 'page-import':
             return importPage({wiki: params.wiki, name: params.name});

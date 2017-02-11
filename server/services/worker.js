@@ -31,6 +31,7 @@ importQueue.process((job) => {
                     });
                 })
                 .catch((error) => {
+                    pino.error(error, 'Error fetching page list during full import', params);
                     sentry.captureException(error, {data: params});
                 });
 

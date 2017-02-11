@@ -3,6 +3,10 @@ const routes = [
     {
         name: 'index',
         path: '/'
+    },
+    {
+        name: 'api/pages',
+        path: '/api/pages/:wiki/:page'
     }
 ];
 

@@ -1,8 +1,10 @@
-import './config/boot';
-import db from './config/db';
-import sentry from './config/sentry';
-import * as queues from './config/queues';
-import repl from 'repl';
+'use strict';
+
+require('./config/boot');
+const db = require('./config/db');
+const sentry = require('./config/sentry');
+const queues = require('./config/queues');
+const repl = require('repl');
 
 const context = {db, queues, sentry};
 

@@ -1,5 +1,6 @@
-import Sentry from 'raven';
+'use strict';
 
+const Sentry = require('raven');
 const SENTRY_DSN = process.env.SENTRY_DSN;
 
 let sentry;
@@ -20,4 +21,4 @@ if (SENTRY_DSN) {
     };
 }
 
-export default sentry;
+module.exports = sentry;

@@ -1,5 +1,7 @@
-import '../config/boot';
-import pino from '../config/pino';
-import '../config/schedule';
+'use strict';
+
+require('../config/boot');
+require('../config/schedule');
+const pino = require('../config/pino');
 
 pino.info('Scheduler inited');

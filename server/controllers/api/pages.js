@@ -1,10 +1,12 @@
-import db from '../../config/db';
-import sentry from '../../config/sentry';
-import pino from '../../config/pino';
+'use strict';
+
+const db = require('../../config/db');
+const sentry = require('../../config/sentry');
+const pino = require('../../config/pino');
 
 const HEADER_API_V1 = 'application/vnd.scpnet.v1+json';
 
-export default function (req, res) {
+module.exports = (req, res) => {
     const wiki = req.params.wiki;
     const page = req.params.page;
 
@@ -34,4 +36,4 @@ export default function (req, res) {
     } else {
         res.send(400);
     }
-}
+};

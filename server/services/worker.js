@@ -1,8 +1,10 @@
-import {importQueue} from '../config/queues';
-import wk from '../config/wikidot-kit';
-import sentry from '../config/sentry';
-import pino from '../config/pino';
-import importPage from '../jobs/import-wikidot-page';
+'use strict';
+
+const {importQueue} = require('../config/queues');
+const wk = require('../config/wikidot-kit');
+const sentry = require('../config/sentry');
+const pino = require('../config/pino');
+const importPage = require('../jobs/import-wikidot-page');
 
 pino.info('Import worker ready');
 

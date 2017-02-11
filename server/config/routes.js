@@ -1,3 +1,4 @@
+'use strict';
 
 const routes = [
     {
@@ -10,9 +11,9 @@ const routes = [
     }
 ];
 
-export default function initRoutes(router) {
+module.exports = function initRoutes(router) {
     routes.forEach((route) => {
         const method = route.method || 'get';
-        router[method](route.path, require(`../controllers/${route.name}`).default);
+        router[method](route.path, require(`../controllers/${route.name}`));
     });
-}
+};

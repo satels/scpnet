@@ -1,5 +1,3 @@
-import initPino from 'pino';
+'use strict';
 
-const pino = initPino();
-
-export default pino;
+module.exports = require('pino')();

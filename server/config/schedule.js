@@ -1,6 +1,6 @@
-import './boot';
-import {importQueue} from './queues';
-import schedule from 'node-schedule';
+require('./boot');
+const queues = require('./queues');
+const schedule = require('node-schedule');
 
 const WIKI_LIST = [
     'scp-ru',
@@ -12,7 +12,7 @@ const WIKI_LIST = [
 
 schedule.scheduleJob('0 3 * * *', () => {
     WIKI_LIST.forEach((wiki) => {
-        importQueue.add({
+        queues.importQueue.add({
             action: 'full-import',
             wiki
         });

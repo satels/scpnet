@@ -1,10 +1,12 @@
-import '../config/boot';
-import sentry from '../config/sentry';
-import pino from '../config/pino';
-import wk from '../config/wikidot-kit';
-import db from '../config/db';
+'use strict';
 
-export default function importPage({wiki, name}) {
+require('../config/boot');
+const sentry = require('../config/sentry');
+const pino = require('../config/pino');
+const wk = require('../config/wikidot-kit');
+const db = require('../config/db');
+
+module.exports = function importPage({wiki, name}) {
     return wk.fetchPage({wiki, name})
         .catch((error) => {
             pino.error(error, 'Error fetching page from Wikidot');
@@ -23,4 +25,4 @@ export default function importPage({wiki, name}) {
             pino.error(error, 'Error saving page');
             sentry.captureException(error, {extra: {wiki, name}});
         });
-}
+};

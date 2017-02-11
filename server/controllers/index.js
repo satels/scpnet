@@ -1,4 +1,6 @@
-export default function (req, res) {
+'use strict';
+
+module.exports = (req, res) => {
     res.send(`
         <style>
             html {
@@ -10,6 +12,6 @@ export default function (req, res) {
                 text-transform: uppercase;
             }
         </style>
-        All systems operational.
+        All systems operational
     `);
-}
+};

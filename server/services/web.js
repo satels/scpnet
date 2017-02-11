@@ -1,13 +1,15 @@
-import '../config/boot';
-import express from 'express';
-import http from 'http';
-import sentry from '../config/sentry';
-import pino from '../config/pino';
-import expressPino from 'express-pino-logger';
-import cookieParser from 'cookie-parser';
-import bodyParser from 'body-parser';
-import serveStatic from 'serve-static';
-import initRoutes from '../config/routes';
+'use strict';
+
+require('../config/boot');
+const express = require('express');
+const http = require('http');
+const sentry = require('../config/sentry');
+const pino = require('../config/pino');
+const expressPino = require('express-pino-logger');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const serveStatic = require('serve-static');
+const initRoutes = require('../config/routes');
 
 const port = process.env.PORT || 4444;
 const app = express();
@@ -54,5 +56,3 @@ server.on('error', (error) => {
     }
 });
 server.listen(port);
-
-export default app;

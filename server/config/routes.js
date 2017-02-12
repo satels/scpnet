@@ -20,6 +20,10 @@ const routes = [
     {
         name: 'api/untranslated-list',
         path: '/_api/wanted_translations/list'
+    },
+    {
+        name: 'api/random-page',
+        path: '/wikidot_random_page'
     }
 ];
 

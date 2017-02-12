@@ -36,7 +36,6 @@
     "bluebird": "^3.4.7",
     "body-parser": "^1.16.0",
     "bull": "^2.1.1",
-    "bull-ui": "^1.2.3",
     "cookie-parser": "^1.4.3",
     "dotenv": "^4.0.0",
     "express": "^4.14.1",

@@ -20,6 +20,7 @@ module.exports = function importPage({wiki, name}) {
         })
         .then(() => {
             pino.info(`[DONE] ${wiki}/${name}`);
+            return 'done';
         })
         .catch((error) => {
             pino.error(error, 'Error saving page');

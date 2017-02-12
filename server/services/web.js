@@ -11,6 +11,10 @@ const bodyParser = require('body-parser');
 const serveStatic = require('serve-static');
 const initRoutes = require('../config/routes');
 
+const bullUI = require('bull-ui/app')({
+    redis: {url: 'redis://localhost'}
+});
+
 const port = process.env.PORT || 4444;
 const app = express();
 const router = express.Router(); // eslint-disable-line new-cap
@@ -26,6 +30,16 @@ app.use(serveStatic(`${__dirname}/../public`));
 
 initRoutes(router);
 app.use('/', router);
+
+app.use('/admin/queue', (req, res, next) => {
+    if (req.cookies['admin_token'] === process.env.ADMIN_TOKEN) {
+        req.basepath = '/admin/queue';
+        res.locals.basepath = '/admin/queue';
+        return next();
+    } else {
+        return res.send(403);
+    }
+}, bullUI);
 
 app.use(sentry.errorHandler());
 

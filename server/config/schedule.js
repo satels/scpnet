@@ -20,3 +20,9 @@ schedule.scheduleJob('0 3 * * *', () => {
         });
     });
 });
+
+schedule.scheduleJob('0 8 * * *', () => {
+    queues.commonQueue.add({
+        action: 'extract-object-titles'
+    });
+});

@@ -36,6 +36,8 @@
     "bluebird": "^3.4.7",
     "body-parser": "^1.16.0",
     "bull": "^2.1.1",
+    "bull-ui": "^1.2.3",
+    "cheerio": "^0.22.0",
     "cookie-parser": "^1.4.3",
     "dotenv": "^4.0.0",
     "express": "^4.14.1",
@@ -47,7 +49,6 @@
     "pino": "^3.4.0",
     "raven": "^1.1.2",
     "serve-static": "^1.11.2",
-    "toureiro": "^0.2.13",
     "wikidot-kit": "^0.5.0"
   }
 }

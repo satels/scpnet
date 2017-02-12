@@ -1,3 +1,4 @@
+'use strict';
 
 exports.up = (knex) => {
     return knex.schema.alterTable('pages', (t) => {

@@ -1,3 +1,5 @@
+'use strict';
+
 require('./boot');
 const queues = require('./queues');
 const schedule = require('node-schedule');

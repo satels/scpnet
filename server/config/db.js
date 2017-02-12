@@ -1,3 +1,5 @@
+'use strict';
+
 const pgp = require('pg-promise');
 const monitor = require('pg-monitor');
 const Bluebird = require('bluebird');

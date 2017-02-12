@@ -1,3 +1,5 @@
+'use strict';
+
 require('./boot');
 const queue = require('bull');
 const sentry = require('./sentry');

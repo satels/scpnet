@@ -52,5 +52,3 @@ module.exports = function extractObjectTitles() {
             sentry.captureException(error);
         });
 };
-
-module.exports();

@@ -17,21 +17,21 @@ module.exports = (req, res) => {
     }
 
     if (wiki && page) {
-        db.one('SELECT data from pages WHERE wiki = $(wiki) AND name = $(page)', {wiki, page})
+        db.oneOrNone('SELECT data from pages WHERE wiki = $(wiki) AND name = $(page)', {wiki, page})
             .then((result) => {
-                res.send(result);
+                if(result) {
+                    res.send(result);
+                } else {
+                    res.status(404).send({result: 'Page not found'});
+                }                
             })
             .catch((error) => {
-                if (error.received === 0) {
-                    res.status(404).send({result: 'Page not found'});
-                } else {
-                    res.status(500).send({error: 'Unhandled internal error'});
-                    sentry.captureException(error, {
-                        tags: {location: 'api/pages'},
-                        extra: {wiki, page}
-                    });
-                    pino.error(error);
-                }
+                res.status(500).send({error: 'Unhandled internal error'});
+                sentry.captureException(error, {
+                    tags: {location: 'api/pages'},
+                    extra: {wiki, page}
+                });
+                pino.error(error);
             });
     } else {
         res.send(400);

@@ -8,13 +8,13 @@ module.exports = (req, res) => {
     const wiki = req.query.wiki;
 
     if (wiki) {
-        db.many(`
+        db.map(`
             SELECT DISTINCT jsonb_array_elements_text(data -> 'tags') as tag
             FROM "pages"
             WHERE "pages"."wiki" = $(wiki);
-        `, {wiki})
+        `, {wiki}, a => a.tag)
             .then((result) => {
-                res.send(result.map((t) => t.tag));
+                res.send(result);
             })
             .catch((error) => {
                 res.status(500).send({error: 'Unhandled internal error'});

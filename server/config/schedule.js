@@ -8,8 +8,8 @@ const WIKI_LIST = [
     'scp-ru',
     'scp-wiki',
     'scpsandbox',
-    'wanderers-library',
-    'scp-int'
+    'wanderers-library'
+    // 'scp-int'
 ];
 
 schedule.scheduleJob('0 3 * * *', () => {

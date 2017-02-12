@@ -16,6 +16,10 @@ const routes = [
     {
         name: 'api/tags-search',
         path: '/_api/wikidot_tags_search/find'
+    },
+    {
+        name: 'api/untranslated-list',
+        path: '/_api/wanted_translations/list'
     }
 ];
 

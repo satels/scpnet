@@ -17,8 +17,8 @@ importQueue.process((job) => {
             pino.info(`Performing full import from ${params.wiki}`);
             return wk.fetchPagesList({wiki: params.wiki})
                 .then((pages) => {
-                    pages.forEach((pageName) => {
-                        importQueue.add({
+                    const queueInserts = pages.map((pageName) => {
+                        return importQueue.add({
                             action: 'page-import',
                             wiki: params.wiki,
                             name: pageName
@@ -33,6 +33,8 @@ importQueue.process((job) => {
                             pagesNumber: pages.length
                         }
                     });
+
+                    return queueInserts;
                 })
                 .catch((error) => {
                     pino.error(error, 'Error fetching page list during full import', params);

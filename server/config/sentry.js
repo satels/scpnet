@@ -14,7 +14,7 @@ if (SENTRY_DSN) {
 } else {
     sentry = {
         captureMessage: () => {},
-        captureExecption: () => {},
+        captureException: () => {},
 
         requestHandler: () => (req, res, next) => next(),
         errorHandler: () => (err, req, res, next) => next(err)

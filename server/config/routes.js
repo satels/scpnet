@@ -8,6 +8,14 @@ const routes = [
     {
         name: 'api/pages',
         path: '/api/pages/:wiki/:page'
+    },
+    {
+        name: 'api/tags-list',
+        path: '/_api/wikidot_tags_search/list'
+    },
+    {
+        name: 'api/tags-search',
+        path: '/_api/wikidot_tags_search/find'
     }
 ];
 

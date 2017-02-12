@@ -19,11 +19,11 @@ module.exports = (req, res) => {
     if (wiki && page) {
         db.oneOrNone('SELECT data from pages WHERE wiki = $(wiki) AND name = $(page)', {wiki, page})
             .then((result) => {
-                if(result) {
+                if (result) {
                     res.send(result);
                 } else {
                     res.status(404).send({result: 'Page not found'});
-                }                
+                }
             })
             .catch((error) => {
                 res.status(500).send({error: 'Unhandled internal error'});

@@ -15,12 +15,6 @@ module.exports = {
             script: './server/services/worker.js',
             watch: false,
             env: {NODE_ENV}
-        },
-        {
-            name: 'scheduler',
-            script: './server/services/scheduler.js',
-            watch: false,
-            env: {NODE_ENV}
         }
     ]
 };

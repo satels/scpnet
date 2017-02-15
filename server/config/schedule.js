@@ -3,6 +3,7 @@
 require('./boot');
 const queues = require('./queues');
 const schedule = require('node-schedule');
+const wk = require('./wikidot-kit');
 
 const WIKI_LIST = [
     'scp-ru',
@@ -18,6 +19,13 @@ schedule.scheduleJob('0 3 * * *', () => {
             action: 'full-import',
             wiki
         });
+    });
+});
+
+schedule.scheduleJob('0 6 * * *', () => {
+    queues.importQueue.add({
+        action: 'members-import',
+        wiki: wk.wiki.SCP_RU
     });
 });
 

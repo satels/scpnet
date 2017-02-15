@@ -5,6 +5,7 @@ const wk = require('../config/wikidot-kit');
 const sentry = require('../config/sentry');
 const pino = require('../config/pino');
 const importPage = require('../jobs/import-wikidot-page');
+const importMembers = require('../jobs/import-wikidot-members');
 const extractObjectTitles = require('../jobs/extract-object-titles');
 
 pino.info('Import worker ready');
@@ -65,6 +66,9 @@ importQueue.process((job) => {
 
         case 'page-import':
             return importPage({wiki: params.wiki, name: params.name});
+
+        case 'members-import':
+            return importMembers({wiki: params.wiki});
 
         default:
             pino.error(`Rejecting job with unknown action "${params.action}"`);

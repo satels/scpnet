@@ -2449,9 +2449,9 @@ wikidot-ajax@^1.1.0:
     cheerio "^0.22.0"
     got "^6.5.0"
 
-wikidot-kit@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/wikidot-kit/-/wikidot-kit-0.6.1.tgz#2ff21baf30587b543e24db665b6bfae3a0b7c58e"
+wikidot-kit@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/wikidot-kit/-/wikidot-kit-0.6.3.tgz#ca3cdbc4aa4414ccfcbd1174d3e921cdabb90725"
   dependencies:
     axios "^0.15.3"
     bluebird "^3.4.6"

@@ -8,7 +8,7 @@ module.exports = {
             name: 'web',
             script: './server/services/web.js',
             watch: true,
-            instances: 4,
+            instances: 2,
             exec_mode: 'cluster',
             env: {NODE_ENV}
         },

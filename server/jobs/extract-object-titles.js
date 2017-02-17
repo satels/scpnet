@@ -9,14 +9,18 @@ const cheerio = require('cheerio');
 const OBJECT_TITLE_REGEXP = /^SCP/;
 
 module.exports = function extractObjectTitles() {
-    var names = ['scp-series', 'scp-series-2', 'scp-series-3', 'joke-scps', 'archived-scps', 'scp-ex'];
+    const wikiName = 'scp-wiki';
+    const pageNames = ['scp-series', 'scp-series-2', 'scp-series-3', 'joke-scps', 'archived-scps', 'scp-ex'];
+
     db.map(`
         SELECT data -> 'html' AS html
         FROM pages
         WHERE
-          wiki = $1 AND name IN ($2:csv)`,
-           ['scp-wiki', names], page => page.html)
+          wiki = $(wikiName) AND name IN ($(pageNames:csv))
+    `, {wikiName, pageNames}, page => page.html)
+
         .reduce((result, pageHtml) => result + pageHtml, '')
+
         .then((html) => {
             const $ = cheerio.load(html);
             return Array.from($('li')).reduce((objects, line) => {

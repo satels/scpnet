@@ -21,7 +21,7 @@ module.exports = function importMembers({wiki}) {
                             username = $(username),
                             about = $(about),
                             memberships = wk_users.memberships || $(memberships)
-            `, {uid, username, about, userSince, memberships});
+                    `, {uid, username, about, userSince, memberships});
                 });
         }, {concurrency})
         .catch((error) => {

@@ -22,14 +22,6 @@ importQueue.process((job) => {
             return wk.fetchPagesList({wiki: params.wiki})
                 .then((pages) => {
                     pino.info(`Full import from ${params.wiki} enqueued`);
-                    sentry.captureMessage('Full wiki pages import scheduled', {
-                        level: 'info',
-                        extra: {
-                            wiki: params.wiki,
-                            pagesNumber: pages.length
-                        }
-                    });
-
                     job.progress(`0/${pages.length}`);
 
                     return pages.map((pageName) => {
@@ -49,14 +41,7 @@ importQueue.process((job) => {
                 }, {concurrency: WIKIDOT_IMPORT_CONCURRENCY})
 
                 .then(() => {
-                    sentry.captureMessage('Full wiki pages import succeeded', {
-                        level: 'info',
-                        extra: {
-                            wiki: params.wiki
-                        }
-                    });
                     pino.info(`Full import from ${params.wiki} completed`);
-
                     return 'done';
                 })
                 .catch((error) => {

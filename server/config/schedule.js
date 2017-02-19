@@ -5,16 +5,8 @@ const queues = require('./queues');
 const schedule = require('node-schedule');
 const wk = require('./wikidot-kit');
 
-const WIKI_LIST = [
-    'scp-ru',
-    'scp-wiki',
-    'scpsandbox',
-    'wanderers-library'
-    // 'scp-int'
-];
-
 schedule.scheduleJob('0 3 * * *', () => {
-    WIKI_LIST.forEach((wiki) => {
+    wk.wikiList.forEach((wiki) => {
         queues.importQueue.add({
             action: 'full-import',
             wiki

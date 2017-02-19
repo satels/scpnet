@@ -36,5 +36,6 @@ const WIKIS = {
 };
 
 wk.wiki = WIKIS;
+wk.wikiList = Object.keys(WIKIS).reduce((acc, name) => acc.concat(WIKIS[name]), []);
 
 module.exports = wk;

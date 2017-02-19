@@ -2,13 +2,23 @@
 
 require('./boot');
 const bull = require('bull');
+const pino = require('../config/pino');
 const sentry = require('./sentry');
 
 function addListenersToQueue(queue) {
     queue
-        .on('error', (error) => sentry.captureException(error))
-        .on('stalled', (job) => sentry.captureMessage('Job stalled', {level: 'warning', extra: {job: job.data}}))
-        .on('failed', (job, error) => sentry.captureException(error, {extra: {job: job.data}}));
+        .on('error', (error) => {
+            pino.error(error, 'Error occured during full import');
+            sentry.captureException(error);
+        })
+        .on('stalled', (job) => {
+            pino.warn('Job stalled', job);
+            sentry.captureMessage('Job stalled', {level: 'warning', extra: {job: job.data}});
+        })
+        .on('failed', (job, error) => {
+            pino.error(error, 'Job failed with error', job);
+            sentry.captureException(error, {extra: {job: job.data}});
+        });
 
     return queue;
 }

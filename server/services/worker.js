@@ -5,12 +5,12 @@ const wk = require('../config/wikidot-kit');
 const sentry = require('../config/sentry');
 const pino = require('../config/pino');
 const importPage = require('../jobs/import-wikidot-page');
-const importMembers = require('../jobs/import-wikidot-members');
+const {fetchMembersList, importUserProfile} = require('../jobs/import-wikidot-members');
 const extractObjectTitles = require('../jobs/extract-object-titles');
 
-pino.info('Import worker ready');
+const QUEUE_INSERTS_CONCURRENCY = 4;
 
-const WIKIDOT_IMPORT_CONCURRENCY = 2;
+pino.info('Import worker ready');
 
 importQueue.process((job) => {
     const params = job.data;
@@ -18,32 +18,15 @@ importQueue.process((job) => {
     switch (params.action) {
 
         case 'full-import':
-            pino.info(`Performing full import from ${params.wiki}`);
-            return wk.fetchPagesList({wiki: params.wiki})
-                .then((pages) => {
-                    pino.info(`Full import from ${params.wiki} enqueued`);
-                    job.progress(`0/${pages.length}`);
-
-                    return pages.map((pageName) => {
-                        return {
-                            name: pageName,
-                            wiki: params.wiki,
-                            total: pages.length
-                        };
+            pino.info(`Performing full import from ${params.wiki.name}`);
+            return wk.fetchPagesList({wiki: params.wiki.name})
+                .map((pageName) => {
+                    return importQueue.add({
+                        action: 'page-import',
+                        wiki: params.wiki.name,
+                        name: pageName
                     });
-                })
-
-                .map(({name, wiki, total}) => {
-                    return importPage({wiki, name}).then(() => {
-                        const current = parseInt(job.progress().split('/')[0], 10) + 1;
-                        return job.progress(`${current}/${total}`);
-                    });
-                }, {concurrency: WIKIDOT_IMPORT_CONCURRENCY})
-
-                .then(() => {
-                    pino.info(`Full import from ${params.wiki} completed`);
-                    return 'done';
-                })
+                }, {concurrency: QUEUE_INSERTS_CONCURRENCY})
                 .catch((error) => {
                     pino.error(error, 'Error occured during full import', params);
                     sentry.captureException(error, {extra: params});
@@ -53,7 +36,23 @@ importQueue.process((job) => {
             return importPage({wiki: params.wiki, name: params.name});
 
         case 'members-import':
-            return importMembers({wiki: params.wiki});
+            pino.info(`Performing members import from ${params.wiki.name}`);
+            return fetchMembersList({wiki: params.wiki})
+                .map(({uid}) => {
+                    return importQueue.add({
+                        action: 'user-profile-import',
+                        wiki: params.wiki,
+                        uid
+                    });
+                }, {concurrency: QUEUE_INSERTS_CONCURRENCY})
+                .catch((error) => {
+                    pino.error(error, 'Error occured during members import', params);
+                    sentry.captureException(error, {extra: params});
+                });
+
+        case 'user-profile-import':
+            pino.info(`Performing UID ${params.uid} import from ${params.wiki.name}`);
+            return importUserProfile({uid: params.uid, wiki: params.wiki});
 
         default:
             pino.error(`Rejecting job with unknown action "${params.action}"`);

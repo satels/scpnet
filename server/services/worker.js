@@ -4,9 +4,9 @@ const {importQueue, commonQueue} = require('../config/queues');
 const wk = require('../config/wikidot-kit');
 const sentry = require('../config/sentry');
 const pino = require('../config/pino');
-const importPage = require('../jobs/import-wikidot-page');
-const {fetchMembersList, importUserProfile} = require('../jobs/import-wikidot-members');
-const extractObjectTitles = require('../jobs/extract-object-titles');
+const importPage = require('../tasks/import-wikidot-page');
+const {fetchMembersList, importUserProfile} = require('../tasks/import-wikidot-members');
+const extractObjectTitles = require('../tasks/extract-object-titles');
 
 const QUEUE_INSERTS_CONCURRENCY = 4;
 

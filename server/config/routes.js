@@ -24,6 +24,10 @@ const routes = [
     {
         name: 'api/random-page',
         path: '/wikidot_random_page'
+    },
+    {
+        name: 'wikidot/mobile-redirect',
+        path: '/wikidot_mobile_redirect_frame/:name'
     }
 ];
 

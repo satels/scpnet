@@ -6,13 +6,13 @@
     "console": "node server/bin/console",
     "test": "eslint .",
     "db": "knex --knexfile server/config/knexfile.js --cwd server",
-    "crontab:install": "crontab -u scpnet /var/scpnet/current/server/configs/system/crontab",
-    "systemd:install": "cp /var/scpnet/current/server/configs/system/scpnet-http.service /etc/systemd/system && cp /var/scpnet/current/server/configs/system/scpnet-worker.service /etc/systemd/system",
+    "crontab:install": "crontab -u scpnet /var/scpnet/current/server/config/system/crontab",
+    "systemd:install": "cp /var/scpnet/current/server/config/system/scpnet-http.service /etc/systemd/system && cp /var/scpnet/current/server/config/system/scpnet-worker.service /etc/systemd/system",
     "systemd:enable": "sudo systemctl enable scpnet-http scpnet-worker",
     "systemd:restart": "sudo systemctl restart scpnet-http scpnet-worker",
     "deploy:install": "npm run crontab:install && npm run systemd:install && npm run systemd:enable",
-    "deploy": "ssh ${SCPNET_DEPLOY_SERVER:-node.scpfoundation.net} 'cd /var/scpnet && (yarn upgrade scpnet || yarn install && yarn upgrade scpnet) && npm run symlink && cd current && npm run db migrate:latest && npm run deploy:install && npm run systemd:restart'",
-    "remote-console": "ssh ${SCPNET_DEPLOY_SERVER:-node.scpfoundation.net} 'cd /var/scpnet/current && npm run console'"
+    "deploy": "ssh scpnet@${SCPNET_DEPLOY_SERVER:-node.scpfoundation.net} 'cd /var/scpnet && (yarn upgrade scpnet || yarn install) && yarn upgrade scpnet && npm run symlink && cd current && npm run db migrate:latest && npm run deploy:install && npm run systemd:restart'",
+    "remote-console": "ssh scpnet@${SCPNET_DEPLOY_SERVER:-node.scpfoundation.net} 'cd /var/scpnet/current && npm run console'"
   },
   "repository": {
     "type": "git",

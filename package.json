@@ -6,8 +6,9 @@
     "console": "node server/bin/console",
     "test": "eslint .",
     "db": "knex --knexfile server/config/knexfile.js --cwd server",
+    "systemd:enable": "sudo systemctl enable scpnet-http scpnet-worker",
     "systemd:restart": "sudo systemctl restart scpnet-http scpnet-worker",
-    "deploy": "ssh $SCPNET_DEPLOY_SERVER \"cd $SCPNET_DEPLOY_PATH && yarn upgrade scpnet && cd node_modules/scpnet && cp ../../env .env && npm run db migrate:latest && npm run systemd:restart\"",
+    "deploy": "ssh $SCPNET_DEPLOY_SERVER \"cd $SCPNET_DEPLOY_PATH && yarn upgrade scpnet && cd node_modules/scpnet && cp ../../env .env && npm run db migrate:latest && npm run systemd:enable && npm run systemd:restart\"",
     "remote-console": "ssh $SCPNET_DEPLOY_SERVER \"cd $SCPNET_DEPLOY_PATH/node_modules/scpnet && npm run console\""
   },
   "repository": {

@@ -1,6 +1,5 @@
 'use strict';
 
-require('./../config/boot');
 const db = require('./../config/db');
 const wk = require('./../config/wikidot-kit');
 const sentry = require('./../config/sentry');

@@ -1,6 +1,5 @@
 'use strict';
 
-require('./boot');
 const bull = require('bull');
 const pino = require('../config/pino');
 const sentry = require('./sentry');
@@ -23,8 +22,8 @@ function addListenersToQueue(queue) {
     return queue;
 }
 
-const importQueue = addListenersToQueue(bull('wikidot-import', process.env.REDIS_PORT, '127.0.0.1'));
-const commonQueue = addListenersToQueue(bull('common-import', process.env.REDIS_PORT, '127.0.0.1'));
+const importQueue = addListenersToQueue(bull('wikidot-import', 6379, '127.0.0.1'));
+const commonQueue = addListenersToQueue(bull('common-import', 6379, '127.0.0.1'));
 
 module.exports = {
     importQueue,

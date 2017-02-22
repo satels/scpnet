@@ -1,6 +1,5 @@
 'use strict';
 
-require('../config/boot');
 const express = require('express');
 const http = require('http');
 const sentry = require('../config/sentry');

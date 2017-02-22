@@ -1,6 +1,5 @@
 'use strict';
 
-require('../config/boot');
 const sentry = require('../config/sentry');
 const pino = require('../config/pino');
 const db = require('../config/db');

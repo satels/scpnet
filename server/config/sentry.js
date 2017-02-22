@@ -1,7 +1,7 @@
 'use strict';
 
 const Sentry = require('raven');
-const SENTRY_DSN = process.env.SENTRY_DSN;
+const SENTRY_DSN = process.env.SCPNET_SENTRY_DSN || process.env.SENTRY_DSN;
 const VERSION = require('../../package.json').version;
 
 let sentry;

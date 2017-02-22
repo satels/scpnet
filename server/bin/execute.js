@@ -1,6 +1,5 @@
 'use strict';
 
-require('../config/boot');
 const Promise = require('bluebird');
 const queues = require('./../config/queues');
 const wk = require('./../config/wikidot-kit');

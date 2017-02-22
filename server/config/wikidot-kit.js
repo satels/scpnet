@@ -2,7 +2,7 @@
 
 const WikidotKit = require('../lib/wikidot-kit');
 
-const token = process.env.WIKIDOT_TOKEN;
+const token = process.env.SCPNET_WIKIDOT_TOKEN || process.env.WIKIDOT_TOKEN;
 const wk = new WikidotKit({token});
 
 const WIKIS = {

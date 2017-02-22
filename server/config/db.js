@@ -8,7 +8,7 @@ const options = {
     promiseLib: Bluebird
 };
 
-const db = pgp(options)(process.env.POSTGRES_DSN);
+const db = pgp(options)(process.env.SCPNET_POSTGRES_DSN || process.env.POSTGRES_DSN);
 monitor.attach(options);
 
 module.exports = db;

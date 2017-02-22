@@ -7,7 +7,7 @@
     "test": "eslint .",
     "db": "knex --knexfile server/config/knexfile.js --cwd server",
     "crontab:install": "sudo crontab -u scpnet /var/scpnet/current/server/config/system/crontab",
-    "systemd:install": "sudo cp /var/scpnet/current/server/config/system/http.service /etc/systemd/system && sudo cp /var/scpnet/current/server/config/system/worker.service /etc/systemd/system",
+    "systemd:install": "sudo cp /var/scpnet/current/server/config/system/http.service /etc/systemd/system/scpnet-http.service && sudo cp /var/scpnet/current/server/config/system/worker.service /etc/systemd/system/scpnet-worker.service",
     "systemd:enable": "sudo systemctl enable scpnet-http scpnet-worker",
     "systemd:restart": "sudo systemctl restart scpnet-http scpnet-worker",
     "deploy:install": "npm run crontab:install && npm run systemd:install && npm run systemd:enable",

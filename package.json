@@ -5,6 +5,9 @@
   "scripts": {
     "console": "node server/bin/console",
     "test": "eslint .",
+    "build": "webpack",
+    "build:production": "webpack -p",
+    "prepublish": "npm run build:production",
     "db": "knex --knexfile server/config/knexfile.js --cwd server",
     "crontab:install": "sudo crontab -u scpnet /var/scpnet/current/server/config/system/crontab",
     "systemd:install": "sudo cp /var/scpnet/current/server/config/system/http.service /etc/systemd/system/scpnet-http.service && sudo cp /var/scpnet/current/server/config/system/worker.service /etc/systemd/system/scpnet-worker.service",
@@ -12,7 +15,7 @@
     "systemd:restart": "sudo systemctl restart scpnet-http scpnet-worker",
     "deploy:install": "npm run crontab:install && npm run systemd:install && npm run systemd:enable",
     "deploy": "ssh scpnet@${SCPNET_DEPLOY_SERVER:-node.scpfoundation.net} 'cd /var/scpnet && (yarn upgrade scpnet || (yarn install && yarn upgrade scpnet)) && npm run symlink && cd current && npm run db migrate:latest && npm run deploy:install && npm run systemd:restart'",
-    "remote-console": "ssh scpnet@${SCPNET_DEPLOY_SERVER:-node.scpfoundation.net} 'cd /var/scpnet/current && npm run console'"
+    "production:console": "ssh -t scpnet@${SCPNET_DEPLOY_SERVER:-node.scpfoundation.net} 'cd /var/scpnet/current && npm run console'"
   },
   "repository": {
     "type": "git",
@@ -30,7 +33,9 @@
   ],
   "devDependencies": {
     "eslint": "^3.15.0",
-    "eslint-config-zireael": "^3.2.0"
+    "eslint-config-zireael": "^3.2.0",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
   },
   "dependencies": {
     "axios": "^0.15.3",

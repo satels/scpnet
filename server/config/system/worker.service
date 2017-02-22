@@ -1,0 +1,15 @@
+[Unit]
+Description=SCPNET Worker
+After=syslog.target network.target nginx.service
+
+[Service]
+User=scpnet
+EnvironmentFile=/etc/sysconfig/scpnet
+WorkingDirectory=/var/scpnet/current
+ExecStart=/usr/bin/node server/services/worker
+Restart=always
+RestartSec=5
+SyslogIdentifier=scpnet-worker
+
+[Install]
+WantedBy=multi-user.target

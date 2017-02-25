@@ -7,6 +7,10 @@ const routes = [
     },
     {
         name: 'api/pages',
+        path: '/api/pages/:wiki'
+    },
+    {
+        name: 'api/pages',
         path: '/api/pages/:wiki/:page'
     },
     {

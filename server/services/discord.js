@@ -15,5 +15,3 @@ hatbot.on('message', (message) => {
 });
 
 hatbot.login(token);
-
-

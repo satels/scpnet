@@ -5,8 +5,11 @@ const pino = require('../config/pino');
 const wk = require('../config/wikidot-kit');
 const db = require('../config/db');
 
+const UID_BLACKLIST = [2335308];
+
 exports.fetchMembersList = function importMembers({wiki}) {
     return wk.fetchMembersList({wikiURL: wiki.url})
+        .filter((user) => !UID_BLACKLIST.includes(user.uid))
         .catch((error) => {
             pino.error(error, 'Error importing members list');
             sentry.captureException(error, {extra: {wikiName: wiki.name}});

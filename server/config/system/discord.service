@@ -1,0 +1,15 @@
+[Unit]
+Description=SCPNET Discord
+After=syslog.target network.target nginx.service
+
+[Service]
+User=scpnet
+EnvironmentFile=/etc/sysconfig/scpnet
+WorkingDirectory=/var/scpnet/current
+ExecStart=/usr/bin/node server/services/discord
+Restart=always
+RestartSec=5
+SyslogIdentifier=scpnet-discord
+
+[Install]
+WantedBy=multi-user.target

@@ -32,6 +32,10 @@ const routes = [
     {
         name: 'wikidot/mobile-redirect',
         path: '/wikidot_mobile_redirect_frame/:name'
+    },
+    {
+        name: 'wikidot/last-thread-post-redirect',
+        path: '/wikidot_last_thread_post_redirect'
     }
 ];
 

@@ -153,6 +153,25 @@ class WikidotKit {
                 }
             });
     }
+
+    /**
+     * Fetches posts from one thread page
+     *
+     * @param {String} wikiURL
+     * @param {Number} topicID
+     * @param {Number} pageNumber
+     *
+     * @returns {Object}
+     */
+    fetchThreadPage({wikiURL, topicID, pageNumber}) {
+        const query = new WikidotAJAX({baseURL: wikiURL});
+
+        return query({
+            moduleName: 'forum/ForumViewThreadPostsModule',
+            t: topicID,
+            pageNo: pageNumber
+        });
+    }
 }
 
 WikidotKit.AJAX = WikidotAJAX;

@@ -37,5 +37,6 @@ const WIKIS = {
 
 wk.wiki = WIKIS;
 wk.wikiList = Object.keys(WIKIS).reduce((acc, name) => acc.concat(WIKIS[name]), []);
+wk.wikiDomains = Object.keys(WIKIS).reduce((acc, name) => acc.concat(WIKIS[name].url.replace('http://', '')), []);
 
 module.exports = wk;

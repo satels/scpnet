@@ -25,7 +25,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(expressPino({logger: pino}));
 
-app.use(serveStatic(`${__dirname}/../public`));
+if (process.NODE_ENV !== 'production') {
+    app.use(serveStatic(`${__dirname}/../public`));
+}
 
 initRoutes(router);
 app.use('/', router);

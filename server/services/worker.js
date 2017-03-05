@@ -7,6 +7,7 @@ const pino = require('../config/pino');
 const importPage = require('../tasks/import-wikidot-page');
 const {fetchMembersList, importUserProfile} = require('../tasks/import-wikidot-members');
 const extractObjectTitles = require('../tasks/extract-object-titles');
+const addDiscordMemberRoles = require('../tasks/add-discord-member-roles');
 
 const QUEUE_INSERTS_CONCURRENCY = 4;
 
@@ -67,6 +68,9 @@ commonQueue.process((job) => {
 
         case 'extract-object-titles':
             return extractObjectTitles();
+
+        case 'add-discord-member-roles':
+            return addDiscordMemberRoles();
 
         default:
             pino.error(`Rejecting job with unknown action "${params.action}"`);

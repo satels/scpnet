@@ -2,4 +2,5 @@ SHELL=/bin/bash
 
 00 03 * * * set -a && source /etc/sysconfig/scpnet && set +a && cd /var/scpnet/current && node server/bin/execute full-import && curl $HEALTH_CHECK_FULL_IMPORT_URL
 00 05 * * * set -a && source /etc/sysconfig/scpnet && set +a && cd /var/scpnet/current && node server/bin/execute members-import && curl $HEALTH_CHECK_MEMBERS_IMPORT_URL
+30 05 * * * set -a && source /etc/sysconfig/scpnet && set +a && cd /var/scpnet/current && node server/bin/execute add-discord-member-roles && curl $HEALTH_CHECK_ADD_DISCORD_MEMBER_ROLES_URL
 00 06 * * * set -a && source /etc/sysconfig/scpnet && set +a && cd /var/scpnet/current && node server/bin/execute extract-object-titles && curl $HEALTH_CHECK_EXTRACT_OBJECT_TITLES_URL

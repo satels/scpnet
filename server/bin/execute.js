@@ -30,6 +30,12 @@ switch (task) {
         }).then(exit);
         break;
 
+    case 'add-discord-member-roles':
+        queues.commonQueue.add({
+            action: 'add-discord-member-roles'
+        }).then(exit);
+        break;
+
     default:
         console.warn('Unknown task, exiting');
         exit();

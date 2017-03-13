@@ -9,7 +9,7 @@ hatbot.on('ready', () => {
 });
 
 hatbot.on('message', (message) => {
-    if (message.content === 'ping') {
+    if (message.content === '/ping') {
         message.channel.sendMessage('pong');
     }
 });

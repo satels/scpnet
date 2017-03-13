@@ -11,6 +11,8 @@ hatbot.on('ready', () => {
 hatbot.on('message', (message) => {
     if (message.content === '/ping') {
         message.channel.sendMessage('pong');
+    } else if (message.content === '/beep') {
+        message.channel.sendMessage('boop');
     }
 });
 

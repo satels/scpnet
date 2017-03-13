@@ -16,8 +16,8 @@
     "nginx:install": "sudo cp /var/scpnet/current/server/config/system/nginx.conf /etc/nginx/sites-enabled/scpnet",
     "nginx:reload": "sudo systemctl reload nginx",
     "deploy:install": "npm run crontab:install && npm run nginx:install && npm run nginx:reload && npm run systemd:install && npm run systemd:enable",
-    "deploy": "ssh scpnet@${SCPNET_DEPLOY_SERVER:-node.scpfoundation.net} 'cd /var/scpnet && (yarn upgrade scpnet || (yarn install && yarn upgrade scpnet)) && npm run symlink && cd current && npm run db migrate:latest && npm run deploy:install && npm run systemd:restart'",
-    "production:console": "ssh -t scpnet@${SCPNET_DEPLOY_SERVER:-node.scpfoundation.net} 'cd /var/scpnet/current && npm run console'"
+    "deploy": "ssh scpnet@${SCPNET_DEPLOY_SERVER:-scpfoundation.net} 'cd /var/scpnet && (yarn upgrade scpnet || (yarn install && yarn upgrade scpnet)) && npm run symlink && cd current && npm run db migrate:latest && npm run deploy:install && npm run systemd:restart'",
+    "production:console": "ssh -t scpnet@${SCPNET_DEPLOY_SERVER:-scpfoundation.net} 'cd /var/scpnet/current && npm run console'"
   },
   "repository": {
     "type": "git",

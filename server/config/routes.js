@@ -14,6 +14,10 @@ const routes = [
         path: '/api/pages/:wiki/:page'
     },
     {
+        name: 'api/random-page',
+        path: '/api/random_page'
+    },
+    {
         name: 'api/tags-list',
         path: '/_api/wikidot_tags_search/list'
     },
@@ -26,7 +30,7 @@ const routes = [
         path: '/_api/wanted_translations/list'
     },
     {
-        name: 'api/random-page',
+        name: 'wikidot/random-page',
         path: '/wikidot_random_page'
     },
     {

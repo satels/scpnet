@@ -7,12 +7,12 @@ const pino = require('../../config/pino');
 module.exports = (req, res) => {
     db.one('SELECT name FROM random_page')
         .then((result) => {
-            res.send({name: result.name});
+            res.redirect(`http://scpfoundation.ru/${result.name}`);
         })
         .catch((error) => {
             res.status(500).send({error: 'Unhandled internal error'});
             sentry.captureException(error, {
-                tags: {location: 'api/random-page'}
+                tags: {location: 'wikidot/random-page'}
             });
             pino.error(error);
         });

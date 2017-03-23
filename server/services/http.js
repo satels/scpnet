@@ -18,6 +18,8 @@ const port = process.env.PORT || 4444;
 const app = express();
 const router = express.Router(); // eslint-disable-line new-cap
 
+app.get('/ping', (req, res) => res.send('pong'));
+
 app.disable('x-powered-by');
 app.use(sentry.requestHandler());
 app.use(bodyParser.json());

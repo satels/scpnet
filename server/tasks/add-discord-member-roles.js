@@ -8,12 +8,13 @@ const db = require('../config/db');
 const token = process.env.SCPNET_DISCORD_TOKEN || process.env.DISCORD_TOKEN;
 
 const SCP_RU_GUILD_ID = '106464299056128000';
+const MEMBERS_ROLE_ID = '106465861476319232';
 
 module.exports = function addDiscordMemberRoles() {
     discord.on('ready', () => {
         const guild = discord.guilds.find((data, key) => key === SCP_RU_GUILD_ID);
         const memberRole = guild.roles.find((role) => {
-            return role.name === 'members';
+            return role.id === MEMBERS_ROLE_ID;
         });
 
         db.map(`

@@ -14,7 +14,7 @@ module.exports = (req, res) => {
             WHERE "pages"."wiki" = $(wiki);
         `, {wiki}, a => a.tag)
             .then((result) => {
-                res.send(result);
+                res.send(result.sort((one, another) => one.localeCompare(another)));
             })
             .catch((error) => {
                 res.status(500).send({error: 'Unhandled internal error'});

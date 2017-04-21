@@ -6,17 +6,18 @@ const wk = require('../config/wikidot-kit');
 const db = require('../config/db');
 
 const UID_BLACKLIST = [2335308];
+const WIKIDOT_IMPORT_CONCURRENCY = 2;
 
-exports.fetchMembersList = function importMembers({wiki}) {
+function fetchMembersList({wiki}) {
     return wk.fetchMembersList({wikiURL: wiki.url})
         .filter((user) => !UID_BLACKLIST.includes(user.uid))
         .catch((error) => {
             pino.error(error, 'Error importing members list');
             sentry.captureException(error, {extra: {wikiName: wiki.name}});
         });
-};
+}
 
-exports.importUserProfile = function importMember({uid, wiki}) {
+function importUserProfile({uid, wiki}) {
     return wk.fetchUserProfile({uid, wikiURL: wiki.url})
         .then(({username, about, userSince, memberSince}) => {
             const memberships = {[wiki.name]: memberSince};
@@ -28,5 +29,24 @@ exports.importUserProfile = function importMember({uid, wiki}) {
                             about = $(about),
                             memberships = wk_users.memberships || $(memberships)
                     `, {uid, username, about, userSince, memberships});
+        })
+        .catch((error) => {
+            pino.error(error, 'Error importing member profile');
+            sentry.captureException(error, {extra: {uid, wikiName: wiki.name}});
+        });
+}
+
+module.exports = function importWikiMembers(wikiName) {
+    const wiki = wk.wiki[wikiName];
+    if (!wiki) {
+        return Promise.reject(new Error(`Unknown wiki ${wikiName}`));
+    }
+    return fetchMembersList({wiki})
+        .map(({uid}) => {
+            return importUserProfile({uid, wiki});
+        }, {concurrency: WIKIDOT_IMPORT_CONCURRENCY})
+        .catch((error) => {
+            pino.error(error, 'Error occured during members import', wiki);
+            sentry.captureException(error, {extra: wiki});
         });
 };

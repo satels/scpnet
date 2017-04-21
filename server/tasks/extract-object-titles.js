@@ -11,7 +11,7 @@ module.exports = function extractObjectTitles() {
     const wikiName = 'scp-wiki';
     const pageNames = ['scp-series', 'scp-series-2', 'scp-series-3', 'joke-scps', 'archived-scps', 'scp-ex'];
 
-    db.map(`
+    return db.map(`
         SELECT data -> 'html' AS html
         FROM pages
         WHERE
